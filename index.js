@@ -1,5 +1,4 @@
-"usee strict";
-
+require('dotenv').config();
 const express = require("express");
 const https = require("https");
 
@@ -33,10 +32,10 @@ app.post("/", function(req, res){
 
     const jsonData = JSON.stringify(data);
 
-    const url = "https://us6.api.mailchimp.com/3.0/lists/ec1edae0fb";
+    const url = process.env.MAILCHIMP;
     const options = {
         method: "POST",
-        auth: "MHR:ee02b27114ea48f7f2b56f8b2a1938ef-us6",
+        auth: process.env.AUTH,
     };
     const request = https.request(url, options, function(response){
         if (response.statusCode === 200) res.sendFile(__dirname + "/success.html")
